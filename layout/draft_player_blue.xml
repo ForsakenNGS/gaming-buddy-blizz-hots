@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <filter type="scale" factor="2"></filter>
+    <filter type="rotate" angle="30.5"></filter>
+    <!-- Hero not locked / Team is currently picking -->
+    <color id="hero.name.active.picking" r="200" g="200" b="210" toleranceLum="35" toleranceHue="110"></color>
+    <!-- Hero not locked / Team is currently active, but not picking (banning or done picking) -->
+    <color id="hero.name.active" r="60" g="90" b="140" toleranceLum="30" toleranceHue="60"></color>
+    <!-- Hero not locked / Team inactive -->
+    <color id="hero.name.inactive" r="75" g="65" b="90" toleranceLum="25" toleranceHue="45"></color>
+    <!-- Hero locked / Team is currently picking -->
+    <color id="hero.name.locked.active" r="14" g="17" b="42" toleranceLum="60" toleranceHue="30"></color>
+    <color id="hero.background.locked.active" r="161" g="177" b="213" toleranceLum="40" toleranceHue="30"></color>
+    <!-- Hero locked / Team inactive -->
+    <color id="hero.name.locked.inactive" r="75" g="50" b="80" toleranceLum="55" toleranceHue="30"></color>
+    <color id="hero.background.locked.inactive" r="168" g="143" b="193" toleranceLum="30" toleranceHue="15"></color>
+    <!-- Player name / Team is currently picking -->
+    <color id="player.name.active" r="150" g="180" b="210" toleranceLum="50" toleranceHue="20"></color>
+    <color id="player.name.active" r="160" g="200" b="220" toleranceLum="50" toleranceHue="20"></color>
+    <!-- Player name / Team inactive -->
+    <color id="player.name.inactive" r="155" g="130" b="165" toleranceLum="25" toleranceHue="20"></color>
+    <color id="player.name.inactive" r="130" g="110" b="140" toleranceLum="35" toleranceHue="20"></color>
+
+    <!-- Hero name -->
+    <layout id="heroName" left="73/292" top="184/298" width="124/292" height="24/298">
+        <layout id="locked.active" manual="true">
+            <filter type="replace-color">
+                <replacement from="hero.name.locked.active" to="black"></replacement>
+                <replacement to="white"></replacement>
+            </filter>
+            <filter type="trim-background" background="white"></filter>
+            <filter type="ocr"></filter>
+        </layout>
+        <layout id="locked.inactive" manual="true">
+            <filter type="replace-color">
+                <replacement from="hero.name.locked.inactive" to="black"></replacement>
+                <replacement to="white"></replacement>
+            </filter>
+            <filter type="trim-background" background="white"></filter>
+            <filter type="ocr"></filter>
+        </layout>
+        <layout id="active.picking" manual="true">
+            <filter type="replace-color">
+                <replacement from="hero.name.active.picking" to="black"></replacement>
+                <replacement to="white"></replacement>
+            </filter>
+            <filter type="trim-background" background="white"></filter>
+            <filter type="ocr"></filter>
+        </layout>
+        <layout id="active" manual="true">
+            <filter type="replace-color">
+                <replacement from="hero.name.active" to="black"></replacement>
+                <replacement to="white"></replacement>
+            </filter>
+            <filter type="trim-background" background="white"></filter>
+            <filter type="ocr"></filter>
+        </layout>
+        <layout id="inactive" manual="true">
+            <filter type="replace-color">
+                <replacement from="hero.name.inactive" to="black"></replacement>
+                <replacement to="white"></replacement>
+            </filter>
+            <filter type="trim-background" background="white"></filter>
+            <filter type="ocr"></filter>
+        </layout>
+    </layout>
+    <!-- Player name -->
+    <layout id="playerName" left="86/292" top="217/298" width="128/292" height="18/298">
+        <filter type="trim-at-color" side="right" colors="boost"></filter>
+        <layout id="active" manual="true">
+            <filter type="replace-color">
+                <replacement from="player.name.active" to="black"></replacement>
+                <replacement to="white"></replacement>
+            </filter>
+            <filter type="trim-background" background="white"></filter>
+            <filter type="ocr"></filter>
+        </layout>
+        <layout id="inactive" manual="true">
+            <filter type="replace-color">
+                <replacement from="player.name.inactive" to="black"></replacement>
+                <replacement to="white"></replacement>
+            </filter>
+            <filter type="trim-background" background="white"></filter>
+            <filter type="ocr"></filter>
+        </layout>
+    </layout>
+</layout>

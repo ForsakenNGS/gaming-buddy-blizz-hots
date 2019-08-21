@@ -1,0 +1,23 @@
+.replay-list tr i.fa.fa-plus-circle {
+    display: inline;
+}
+
+.replay-list tr i.fa.fa-minus-circle {
+    display: none;
+}
+
+.replay-list tr + tr.details {
+    display: none;
+}
+
+.replay-list tr.expanded i.fa.fa-plus-circle {
+    display: none;
+}
+
+.replay-list tr.expanded i.fa.fa-minus-circle {
+    display: inline;
+}
+
+.replay-list tr.expanded + tr.details {
+    display: table-row;
+}

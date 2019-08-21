@@ -1,0 +1,81 @@
+{% extends "core::frame.twig" %}
+{% block content %}
+    <div class="container">
+        <h1>Recent Replays</h1>
+
+        <table class="table table-sm table-bordered table-striped table-dark replay-list">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Date</th>
+                    <th>Map</th>
+                    <th>Uploaded to</th>
+                </tr>
+            </thead>
+            {% for index, replay in plugin.gameData.replays.details %}
+            <tbody class="hots-replay" data-index="{{ index }}" data-template="gaming-buddy-blizz-hots::elements/replay.twig">
+                {% include "gaming-buddy-blizz-hots::elements/replay.twig" %}
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+  <link rel="stylesheet" href="{{ plugin.getFilePath("gui", "replays.css") }}">
+  <script type="text/javascript">
+      $(function () {
+          let plugin = gui.getPlugin("{{ plugin.name }}").frontend;
+
+          // Learn new bans (modal)
+          let banLearn = (banElement) => {
+              let imageData = $(banElement).attr("src");
+              $("#hots-modal-ban-learn .btn-primary").off("click").on("click", function (e) {
+                  // Save ban
+                  e.preventDefault();
+                  plugin.saveHeroBanImage($("#hots-modal-ban-learn-hero").val(), imageData);
+                  $("#hots-modal-ban-learn").modal("hide");
+              });
+              $("#hots-modal-ban-learn").modal("show");
+          };
+
+          // Learn hero name substitutions
+          let heroLearn = (heroElement) => {
+              let heroNameFailed = $(heroElement).attr("data-name");
+              $("#hots-modal-hero-learn .btn-primary").off("click").on("click", function (e) {
+                  // Save ban
+                  e.preventDefault();
+                  let heroIdCorrect = $("#hots-modal-hero-learn-name").val();
+                  plugin.gameData.addHeroCorrection(heroNameFailed, heroIdCorrect);
+                  plugin.saveHeroCorrection(heroNameFailed, heroIdCorrect);
+                  $("#hots-modal-hero-learn").modal("hide");
+              });
+              $("#hots-modal-hero-learn").modal("show");
+          };
+
+          // Player recent picks tooltip
+          let playerInitTooltip = function(element) {
+              jQuery(element).find("[data-tooltip=\"player-picks\"]").each(function() {
+                  jQuery(this).popover({
+                      trigger: 'hover',
+                      content: jQuery(this).find("script[data-content=\"player-picks\"]").html(),
+                      container: this
+                  });
+              });
+          };
+
+          // Executed every time some element is rendered
+          let elementBinding = (element) => {
+              $(element).find("[data-plugin-action=\"ban-learn\"]").on("click", function () {
+                  banLearn(this);
+              });
+              $(element).find("[data-plugin-action=\"hero-learn\"]").on("click", function () {
+                  heroLearn(this);
+              })
+              playerInitTooltip(element);
+          };
+
+          // Apply to elements rendered async
+          plugin.on("element.rendered", elementBinding);
+          // Initial call
+          elementBinding($(".content"));
+      });
+  </script>
+{% endblock %}

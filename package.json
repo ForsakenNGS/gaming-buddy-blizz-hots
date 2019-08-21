@@ -1,0 +1,17 @@
+{
+  "name": "gaming-buddy-blizz-hots",
+  "version": "1.0.0",
+  "main": "main.js",
+  "author": "Jens N",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "@google-cloud/bigquery": "^4.1.8",
+    "cheerio": "^1.0.0-rc.3",
+    "hots-replay": "^1.0.3",
+    "jimp": "^0.6.4",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "@forsaken87/gaming-buddy-plugins": "file:/home/forsaken/Workspaces/NodeJS/gaming-buddy-plugins"
+  }
+}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <section name="general" title="General settings">
+        <value type="select" name="language" label="Game Language" default="en-us">
+            <option value="en-us">English (US)</option>
+            <!-- All further languages will be added dynamically -->
+        </value>
+        <value type="text" name="game-player-name" label="Your player name"></value>
+        <value type="path" name="game-storage-dir" label="Game storage dir" default=""></value>
+        <value type="path" name="game-temp-dir" label="Game temp dir" default=""></value>
+    </section>
+    <section name="draft" checkbox="true" title="Draft helper" default="true">
+        <value type="select" name="draft-provider" label="Provider" default="hotsdraft">
+            <option value="hotsdraft">hotsdraft.com</option>
+            <option value="heroescounters">heroescounters.com</option>
+        </value>
+    </section>
+    <section name="talents" checkbox="true" title="Talent helper" default="true">
+        <value type="select" name="talents-provider" label="Provider" default="icyveins">
+            <option value="icyveins">icy-veins.com</option>
+        </value>
+    </section>
+    <section name="replays" checkbox="true" title="Replay upload" default="true">
+        <value type="checkbox" name="replays-hotsapi" label="hotsapi.net" default="true">
+            Upload replays to hotsapi.net
+        </value>
+    </section>
+    <section name="statistics" checkbox="true" title="Player statistics" default="true">
+        <value type="text" name="statistics-big-query-project" label="Google BigQuery project id"></value>
+        <value type="path" name="statistics-big-query-auth-file" label="Google BigQuery authentification file (for HotsApi.net data access)"></value>
+    </section>
+    <section name="feedback" checkbox="true" title="Submit Feedback" default="true">
+        <value type="checkbox" name="feedback-player-names" label="Map names" default="true">
+            Upload map names to improve the text recognition
+        </value>
+        <value type="checkbox" name="feedback-player-names" label="Player names" default="true">
+            Upload player names to improve the text recognition
+        </value>
+        <value type="checkbox" name="feedback-hero-names" label="Hero names" default="true">
+            Upload hero names to improve the text recognition
+        </value>
+    </section>
+</config>

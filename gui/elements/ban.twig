@@ -1,0 +1,23 @@
+{% set teamColor = teamColor|default(guiElement['data-team']) %}
+{% set index = index|default(guiElement['data-index']) %}
+{% set heroName = plugin.draft.teams[teamColor].bans[index] %}
+{% set heroImage = plugin.draft.teams[teamColor].banImageData[index] %}
+{% set locked = plugin.draft.teams[teamColor].bansLocked[index] %}
+<div class="d-flex flex-column h-100 {% if heroName != "???" %}text-dark {% if locked %}bg-light{% else %}bg-warning{% endif %}{% else %}text-dark bg-danger{% endif %}">
+    {% if heroName is not null %}
+        <div class="card-img-top d-flex flex-column flex-grow-1 align-items-center">
+        {% if heroName != "???" %}
+            <img class="img-fluid" src="{{ plugin.gameData.getHeroImage( heroName ) }}" alt="{{ heroName }}">
+        {% else %}
+            <img class="img-fluid" src="data:image/png;base64,{{ heroImage }}" alt="{{ heroName }}" data-plugin-action="ban-learn">
+        {% endif %}
+        </div>
+    {% else %}
+        <div class="hots-draft-ban-hero-none card-img-top">?</div>
+    {% endif %}
+    <div class="card-body p-1">
+        <p class="card-text text-center">
+            <b>{{ heroName }}</b>
+        </p>
+    </div>
+</div>

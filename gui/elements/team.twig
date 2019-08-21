@@ -1,0 +1,6 @@
+{% set teamColor = teamColor|default(guiElement['data-team']) %}
+{% for playerIndex in 0..4 %}
+    <div class="hots-draft-player card mb-3" data-template="gaming-buddy-blizz-hots::elements/player.twig" data-team="{{ teamColor }}" data-index="{{ playerIndex }}">
+        {% include "player.twig" with { team: teamColor, index: playerIndex } %}
+    </div>
+{% endfor %}

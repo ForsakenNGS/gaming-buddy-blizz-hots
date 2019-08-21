@@ -1,0 +1,32 @@
+<div class="heroescounters-sort">
+    <a data-field="winrate" href="#" class="mx-1 badge {% if sortField[team]=='winrate' %}badge-primary{% else %}badge-secondary{% endif %}">
+        Winrate
+    </a>
+    <a data-field="score_mix" href="#" class="mx-1 badge {% if sortField[team]=='score_mix' %}badge-primary{% else %}badge-secondary{% endif %}">
+        Winrate+Votes
+    </a>
+    <a data-field="score" href="#" class="mx-1 badge {% if sortField[team]=='score' %}badge-primary{% else %}badge-secondary{% endif %}">
+        User votes
+    </a>
+    <a data-field="counters" href="#" class="mx-1 badge {% if sortField[team]=='counters' %}badge-primary{% else %}badge-secondary{% endif %}">
+        Counters
+    </a>
+    <a data-field="synergy" href="#" class="mx-1 badge {% if sortField[team]=='synergy' %}badge-primary{% else %}badge-secondary{% endif %}">
+        Synergies
+    </a>
+    <a data-field="map" href="#" class="mx-1 badge {% if sortField[team]=='map' %}badge-primary{% else %}badge-secondary{% endif %}">
+        Map
+    </a>
+    <a data-field="tier" href="#" class="mx-1 badge {% if sortField[team]=='tier' %}badge-primary{% else %}badge-secondary{% endif %}">
+        Tier
+    </a>
+</div>
+<script type="text/javascript">
+$(function() {
+    let plugin = gui.getPlugin("{{ plugin.name }}").frontend;
+
+    $(".heroescounters-sort a").on("click", function(e) {
+        plugin.sendMessage("draft.provider", "sortBy", "{{ team }}", $(this).attr("data-field"))
+    });
+});
+</script>

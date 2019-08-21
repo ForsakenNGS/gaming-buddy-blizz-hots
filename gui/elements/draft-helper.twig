@@ -1,0 +1,7 @@
+<div>
+{% if plugin.draftProvider %}
+    {% include plugin.draftProvider.template with plugin.draftProvider.templateData %}
+{% else %}
+    <h4>Error loading draft provider</h4>
+{% endif %}
+</div>

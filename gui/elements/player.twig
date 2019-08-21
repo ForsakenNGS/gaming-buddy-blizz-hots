@@ -1,0 +1,32 @@
+{% set teamColor = teamColor|default(guiElement['data-team']) %}
+{% set index = index|default(guiElement['data-index']) %}
+{% set player = plugin.getPlayer(teamColor, index) %}
+<div class="{% if player.locked %}text-white bg-dark{% else %}text-dark bg-light{% endif %}">
+    {% if player.detectionError %}
+        <div class="hots-draft-player-hero-none card-img-top" data-plugin-action="hero-learn" data-name="{{ player.character }}">
+            <span class="fa fa-exclamation-triangle"></span>
+        </div>
+    {% else %}
+        {% set heroImage = (player.character ? plugin.gameData.getHeroImage(player.character) : null) %}
+        {% if heroImage is not null %}
+            <img class="hots-draft-player-hero-image card-img-top" src="{{ heroImage }}" alt="{{ player.character }}">
+        {% else %}
+            <div class="hots-draft-player-hero-none card-img-top">?</div>
+        {% endif %}
+    {% endif %}
+    <div class="card-body p-1">
+        <p class="card-text text-center">
+            <b>{% if player.character %}{{ player.character }}{% else %}---{% endif %}</b>
+            <br />
+            <small>
+                {{ player.name }}
+                {% if player.recentPicks != null %}
+                <a data-html="true" data-tooltip="player-picks" data-placement="{% if player.team == "blue" %}right{% else %}left{% endif %}">
+                    <i class="fa fa-info-circle"></i>
+                    <script data-content="player-picks" type="text/html">{% include "playerPicks.twig" %}</script>
+                </a>
+                {% endif %}
+            </small>
+        </p>
+    </div>
+</div>

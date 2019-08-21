@@ -1,0 +1,7 @@
+<div data-type="talent-provider" class="provider-icyveins">
+{% if talents.parsed %}
+    {% include "icyveins-parsed.twig" %}
+{% else %}
+    {% include "icyveins-iframe.twig" %}
+{% endif %}
+</div>

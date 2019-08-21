@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <filter type="scale" factor="2" mode="HERMITE"></filter>
+    <filter type="rotate" angle="-30.5" mode="HERMITE"></filter>
+    <!-- Hero locked / Team is currently picking -->
+    <color id="hero.name.locked.active" r="60" g="10" b="20" toleranceLum="65" toleranceHue="30"></color>
+    <color id="hero.background.locked.active" r="205" g="175" b="180" toleranceLum="40" toleranceHue="30"></color>
+    <color id="hero.background.locked.active" r="210" g="130" b="140" toleranceLum="40" toleranceHue="30"></color>
+    <!-- Hero locked / Team inactive -->
+    <color id="hero.name.locked.inactive" r="75" g="50" b="80" toleranceLum="55" toleranceHue="30"></color>
+    <color id="hero.background.locked.inactive" r="166" g="134" b="197" toleranceLum="35" toleranceHue="25"></color>
+    <!-- Player name / Team is currently picking -->
+    <color id="player.name.active" r="210" g="130" b="155" toleranceLum="40" toleranceHue="15"></color>
+    <color id="player.name.active" r="200" g="100" b="130" toleranceLum="40" toleranceHue="15"></color>
+    <color id="player.name.active" r="195" g="90" b="105" toleranceLum="30" toleranceHue="15"></color>
+    <!-- Player name / Team inactive -->
+    <color id="player.name.inactive" r="155" g="130" b="165" toleranceLum="45" toleranceHue="15"></color>
+    <color id="player.name.inactive" r="130" g="110" b="140" toleranceLum="45" toleranceHue="10"></color>
+
+    <!-- Hero name -->
+    <layout id="heroName" left="98/292" top="184/298" width="124/292" height="24/298">
+        <layout id="locked.active" manual="true">
+            <filter type="replace-color">
+                <replacement from="hero.name.locked.active" to="black"></replacement>
+                <replacement to="white"></replacement>
+            </filter>
+            <filter type="trim-background" background="white"></filter>
+            <filter type="ocr"></filter>
+        </layout>
+        <layout id="locked.inactive" manual="true">
+            <filter type="replace-color">
+                <replacement from="hero.name.locked.inactive" to="black"></replacement>
+                <replacement to="white"></replacement>
+            </filter>
+            <filter type="trim-background" background="white"></filter>
+            <filter type="ocr"></filter>
+        </layout>
+    </layout>
+    <!-- Player name -->
+    <layout id="playerName" left="80/292" top="217/298" width="128/292" height="18/298">
+        <filter type="trim-at-color" side="right" colors="boost"></filter>
+        <layout id="active" manual="true">
+            <filter type="replace-color">
+                <replacement from="player.name.active" to="black"></replacement>
+                <replacement to="white"></replacement>
+            </filter>
+            <filter type="trim-background" background="white"></filter>
+            <filter type="ocr"></filter>
+        </layout>
+        <layout id="inactive" manual="true">
+            <filter type="replace-color">
+                <replacement from="player.name.inactive" to="black"></replacement>
+                <replacement to="white"></replacement>
+            </filter>
+            <filter type="trim-background" background="white"></filter>
+            <filter type="ocr"></filter>
+        </layout>
+    </layout>
+</layout>

@@ -1,0 +1,7 @@
+<div>
+{% if plugin.talentProvider %}
+    {% include plugin.talentProvider.template with plugin.talentProvider.templateData %}
+{% else %}
+    <h4>Error loading talent provider</h4>
+{% endif %}
+</div>
