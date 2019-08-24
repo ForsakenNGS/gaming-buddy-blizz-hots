@@ -1,5 +1,5 @@
 {
-  "name": "gaming-buddy-blizz-hots",
+  "name": "@forsaken87/gaming-buddy-blizz-hots",
   "version": "1.0.0",
   "main": "main.js",
   "author": "Jens N",
@@ -13,6 +13,6 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
-    "@forsaken87/gaming-buddy-plugins": "file:/home/forsaken/Workspaces/NodeJS/gaming-buddy-plugins"
+    "@forsaken87/gaming-buddy-plugins": "^1.0.0"
   }
 }
