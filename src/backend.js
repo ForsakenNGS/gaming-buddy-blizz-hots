@@ -108,7 +108,7 @@ class BlizzHotsBackend extends GamingBuddyPluginBackend {
    * @returns {boolean}
    */
   checkActive(window) {
-    return window.title.match(/^Screenshot/);
+    return window.title.match(/^Heroes of the Storm/);
   }
 
   /**
