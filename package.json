@@ -4,6 +4,7 @@
   "main": "main.js",
   "author": "Jens N",
   "license": "GPL-3.0",
+  "keywords": [ "gaming-buddy-plugin" ],
   "dependencies": {
     "@google-cloud/bigquery": "^4.1.8",
     "cheerio": "^1.0.0-rc.3",
