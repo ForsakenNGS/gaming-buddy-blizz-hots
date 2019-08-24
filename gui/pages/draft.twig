@@ -2,37 +2,34 @@
 {% block content %}
   <div class="hots-draft-flex d-flex">
     <div class="hots-draft-team-blue align-self-stretch bg-info border-right border-info p-2"
-         data-template="gaming-buddy-blizz-hots::elements/team.twig" data-team="blue">
-      {% include "gaming-buddy-blizz-hots::elements/team.twig" with { teamColor: "blue" } %}
+         data-template="@forsaken87-gaming-buddy-blizz-hots::elements/team.twig" data-team="blue">
+      {% include "@forsaken87-gaming-buddy-blizz-hots::elements/team.twig" with { teamColor: "blue" } %}
     </div>
     <div class="hots-draft-center align-self-stretch bg-dark text-light flex-grow-1 flex-column p-2">
       <div class="d-flex">
-        <div class="hots-draft-bans-blue d-flex text-left" data-template="gaming-buddy-blizz-hots::elements/bans.twig"
-             data-team="blue">
-          {% include "gaming-buddy-blizz-hots::elements/bans.twig" with { teamColor: "blue" } %}
+        <div class="hots-draft-bans-blue d-flex text-left" data-template="@forsaken87-gaming-buddy-blizz-hots::elements/bans.twig" data-team="blue">
+          {% include "@forsaken87-gaming-buddy-blizz-hots::elements/bans.twig" with { teamColor: "blue" } %}
         </div>
         <div class="flex-grow-1">
-          <div class="hots-draft-map text-center" data-template="gaming-buddy-blizz-hots::elements/map.twig">
-            {% include "gaming-buddy-blizz-hots::elements/map.twig" %}
+          <div class="hots-draft-map text-center" data-template="@forsaken87-gaming-buddy-blizz-hots::elements/map.twig">
+            {% include "@forsaken87-gaming-buddy-blizz-hots::elements/map.twig" %}
           </div>
           <!-- Timer / active team? --->
         </div>
-        <div class="hots-draft-bans-blue d-flex text-right" data-template="gaming-buddy-blizz-hots::elements/bans.twig"
-             data-team="red">
-          {% include "gaming-buddy-blizz-hots::elements/bans.twig" with { teamColor: "red" } %}
+        <div class="hots-draft-bans-blue d-flex text-right" data-template="@forsaken87-gaming-buddy-blizz-hots::elements/bans.twig" data-team="red">
+          {% include "@forsaken87-gaming-buddy-blizz-hots::elements/bans.twig" with { teamColor: "red" } %}
         </div>
       </div>
-      <div class="hots-draft-helper" data-template="gaming-buddy-blizz-hots::elements/draft-helper.twig">
-        {% include "gaming-buddy-blizz-hots::elements/draft-helper.twig" %}
+      <div class="hots-draft-helper" data-template="@forsaken87-gaming-buddy-blizz-hots::elements/draft-helper.twig">
+        {% include "@forsaken87-gaming-buddy-blizz-hots::elements/draft-helper.twig" %}
       </div>
     </div>
-    <div class="hots-draft-team-red align-self-stretch bg-info border-right border-info p-2"
-         data-template="gaming-buddy-blizz-hots::elements/team.twig" data-team="red">
-      {% include "gaming-buddy-blizz-hots::elements/team.twig" with { teamColor: "red" } %}
+    <div class="hots-draft-team-red align-self-stretch bg-info border-right border-info p-2" data-template="@forsaken87-gaming-buddy-blizz-hots::elements/team.twig" data-team="red">
+      {% include "@forsaken87-gaming-buddy-blizz-hots::elements/team.twig" with { teamColor: "red" } %}
     </div>
   </div>
-  {% include "gaming-buddy-blizz-hots::elements/modal-ban-learn.twig" %}
-  {% include "gaming-buddy-blizz-hots::elements/modal-hero-learn.twig" %}
+  {% include "@forsaken87-gaming-buddy-blizz-hots::elements/modal-ban-learn.twig" %}
+  {% include "@forsaken87-gaming-buddy-blizz-hots::elements/modal-hero-learn.twig" %}
   <link rel="stylesheet" href="{{ plugin.getFilePath("gui", "draft.css") }}">
   <script type="text/javascript">
       $(function () {

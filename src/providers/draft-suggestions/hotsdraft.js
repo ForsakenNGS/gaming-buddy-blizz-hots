@@ -98,7 +98,7 @@ class HeroesCountersProvider extends HotsDraftSuggestions {
         return this.heroesById[id];
     }
     getTemplate() {
-        return "gaming-buddy-blizz-hots::providers/hotsdraft.twig";
+        return "@forsaken87-gaming-buddy-blizz-hots::providers/hotsdraft.twig";
     }
     getTemplateData() {
         return {

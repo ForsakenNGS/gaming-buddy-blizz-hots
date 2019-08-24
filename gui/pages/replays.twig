@@ -13,8 +13,8 @@
                 </tr>
             </thead>
             {% for index, replay in plugin.gameData.replays.details %}
-            <tbody class="hots-replay" data-index="{{ index }}" data-template="gaming-buddy-blizz-hots::elements/replay.twig">
-                {% include "gaming-buddy-blizz-hots::elements/replay.twig" %}
+            <tbody class="hots-replay" data-index="{{ index }}" data-template="@forsaken87-gaming-buddy-blizz-hots::elements/replay.twig">
+                {% include "@forsaken87-gaming-buddy-blizz-hots::elements/replay.twig" %}
             </tbody>
             {% endfor %}
         </table>

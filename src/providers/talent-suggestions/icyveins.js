@@ -49,7 +49,7 @@ class IcyVeinsProvider extends HotsTalentSuggestions {
         return this.heroesById[id];
     }
     getTemplate() {
-        return "gaming-buddy-blizz-hots::providers/icyveins.twig";
+        return "@forsaken87-gaming-buddy-blizz-hots::providers/icyveins.twig";
     }
     getTemplateData() {
         return {

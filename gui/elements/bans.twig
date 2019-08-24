@@ -1,6 +1,6 @@
 {% set teamColor = teamColor|default(guiElement['data-team']) %}
 {% for banIndex in 0..2 %}
-    <div class="hots-draft-ban card mx-1" data-template="gaming-buddy-blizz-hots::elements/ban.twig" data-team="{{ teamColor }}" data-index="{{ banIndex }}">
+    <div class="hots-draft-ban card mx-1" data-template="@forsaken87-gaming-buddy-blizz-hots::elements/ban.twig" data-team="{{ teamColor }}" data-index="{{ banIndex }}">
         {% include "ban.twig" with { team: teamColor, index: banIndex } %}
     </div>
 {% endfor %}
