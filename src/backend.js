@@ -200,6 +200,7 @@ class BlizzHotsBackend extends GamingBuddyPluginBackend {
                     // Game ended
                     this.getPageNav("talents").visible = false;
                     this.emit("game.end");
+                    this.playerCharacter = null;
                     this.draft.clear();
                 }
                 if (prevState === gameStateDrafting) {
@@ -216,9 +217,9 @@ class BlizzHotsBackend extends GamingBuddyPluginBackend {
                 if (this.gameState === gameStateDrafting) {
                     // Draft started
                     this.getPageNav("draft").visible = true;
-                    this.playerCharacter = null;
                     this.setFrontendPage("draft");
                     this.emit("draft.start");
+                    this.playerCharacter = null;
                 }
             }
             // Delay update while game is active
