@@ -45,6 +45,7 @@ class BlizzHotsBackend extends GamingBuddyPluginBackend {
             this.setConfigValues(pluginConfig.values);
         }
         this.draft = new HotsDraft(this);
+        this.playerCharacter = null;
         this.gameData = new HotsGameData(this);
         this.gameState = gameStateMenus;
         this.draftProvider = null;
@@ -69,8 +70,8 @@ class BlizzHotsBackend extends GamingBuddyPluginBackend {
         this.loadReplayProviders();
         // Initialize pages
         this.on("ready", () => {
-            this.addPageNav("draft", "Draft-Tool", "fa fa-poll");
-            this.addPageNav("talents", "Talents", "fa fa-gem");
+            this.addPageNav("draft", "Draft-Tool", "fa fa-poll", false);
+            this.addPageNav("talents", "Talents", "fa fa-gem", false);
             this.addPageNav("replays", "Replays", "fa fa-video");
         })
     }
@@ -99,6 +100,14 @@ class BlizzHotsBackend extends GamingBuddyPluginBackend {
         });
         // Player changed
         this.draft.on("player.update", (team, player) => {
+            if (player.name === this.getConfigValue("game-player-name")) {
+                // Player (de)selected a character
+                this.playerCharacter = player.character;
+                if (this.playerCharacter !== null) {
+                    this.getPageNav("talents").visible = true;
+                    this.talentProvider.update();
+                }
+            }
             this.sendMessage("draft.player", player);
         });
         // Replay updated
@@ -185,20 +194,25 @@ class BlizzHotsBackend extends GamingBuddyPluginBackend {
             if (this.gameState !== prevState) {
                 if (prevState === gameStatePlaying) {
                     // Game ended
+                    this.getPageNav("talents").visible = false;
                     this.emit("game.end");
                     this.draft.clear();
                 }
                 if (prevState === gameStateDrafting) {
                     // Draft ended
+                    this.getPageNav("draft").visible = false;
                     this.emit("draft.end");
                 }
                 if (this.gameState === gameStatePlaying) {
                     // Game started
+                    this.getPageNav("talents").visible = true;
                     this.setFrontendPage("talents");
                     this.emit("game.start");
                 }
                 if (this.gameState === gameStateDrafting) {
                     // Draft started
+                    this.getPageNav("draft").visible = true;
+                    this.playerCharacter = null;
                     this.setFrontendPage("draft");
                     this.emit("draft.start");
                 }

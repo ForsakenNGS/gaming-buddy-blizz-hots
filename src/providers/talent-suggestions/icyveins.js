@@ -85,26 +85,16 @@ class IcyVeinsProvider extends HotsTalentSuggestions {
     update() {
         return new Promise((resolve, reject) => {
             this.talents = null;
-            let playerName = this.plugin.getConfigValue("game-player-name");
-            if ((playerName !== "") && (this.plugin.draft !== null)) {
-                // Check the selected hero
-                let players = this.plugin.draft.getPlayers();
-                let playerHero = null;
-                for (let i = 0; i < players.length; i++) {
-                    let player = players[i];
-                    if (player.name === playerName) {
-                        playerHero = this.getHeroByName(player.character);
-                        break;
-                    }
-                }
-                if (playerHero !== null) {
-                    this.talents = playerHero;
-                }
+            if (this.plugin.playerCharacter !== null) {
+                this.talents = this.getHeroByName(this.plugin.playerCharacter);
             }
-            if (this.talents === null) {
+            if ((this.talents === null) || this.talents.hasOwnProperty("parsed")) {
+                // No hero selected or build already parsed
                 resolve();
             } else {
+                console.log("Loading Icyveins build guide for '"+this.talents.id+"'...");
                 this.parseBuild(this.talents).then(() => {
+                    this.emit("change");
                     resolve();
                 }).catch((error) => {
                     console.error("Failed to parse build data for icy-veins provider, falling back to iframe.");
