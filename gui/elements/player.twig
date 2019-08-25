@@ -1,7 +1,6 @@
 {% set teamColor = teamColor|default(guiElement['data-team']) %}
 {% set index = index|default(guiElement['data-index']) %}
 {% set player = plugin.getPlayer(teamColor, index) %}
-{% if player %}
 <div class="{% if player.locked %}text-white bg-dark{% else %}text-dark bg-light{% endif %}">
     {% if player.detectionError %}
         <div class="hots-draft-player-hero-none card-img-top" data-plugin-action="hero-learn" data-name="{{ player.character }}">
@@ -31,4 +30,3 @@
         </p>
     </div>
 </div>
-{% endif %}

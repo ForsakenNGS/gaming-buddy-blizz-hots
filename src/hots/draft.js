@@ -284,9 +284,11 @@ class HotsDraft extends EventEmitter {
       let bansLocked = team.getBansLocked();
       if (bansLocked > index) {
         // Ban already locked, do not update again.
+        console.log("Ban #"+(index+1)+" skipped! (Ban already locked)");
         resolve();
         return;
       }
+      console.log("Ban #"+(index+1)+" updating...");
       let imageCompare = image.clone().resize(this.layoutBanCompare.bounds.computed.width, this.layoutBanCompare.bounds.computed.height);
       let matchBestHero = null;
       let matchBestValue = 0.15;
