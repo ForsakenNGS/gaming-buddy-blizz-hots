@@ -173,6 +173,7 @@ class HotsDraft extends EventEmitter {
           return Promise.resolve(true);
         });
       }).then((draftDetected) => {
+        this.plugin.debugStatus("Detection done!");
         this.plugin.debugLayoutsDone();
         resolve(draftDetected);
       }).catch((error) => {
@@ -182,6 +183,7 @@ class HotsDraft extends EventEmitter {
   }
 
   updateTop() {
+    this.plugin.debugStatus("Detecting map/bans ...");
     // Apply layout "draft.top"
     return this.layoutDraft.getById("draft.top").applyFromScreen(this.plugin.app).then((results) => {
       // Debug data
@@ -314,6 +316,7 @@ class HotsDraft extends EventEmitter {
   }
 
   updateTeam(color) {
+    this.plugin.debugStatus("Detecting players ...");
     // Apply layout "draft.picks.blue"
     return this.layoutDraft.getById("draft.picks."+color).applyFromScreen(this.plugin.app).then((results) => {
       // Debug data

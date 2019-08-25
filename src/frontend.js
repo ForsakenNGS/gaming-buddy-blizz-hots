@@ -29,7 +29,7 @@ class BlizzHotsFrontend extends GamingBuddyPluginFrontend {
    * @returns {null|*}
    */
   getPlayer(team, index) {
-    if (!this.draft.hasOwnProperty("teams") || !this.draft.teams.hasOwnProperty(team)) {
+    if (!this.draft.hasOwnProperty("teams") || !this.draft.teams.hasOwnProperty(team) || !this.draft.teams[team].hasOwnProperty("players")) {
       return null;
     }
     return this.draft.teams[team].players[index];
