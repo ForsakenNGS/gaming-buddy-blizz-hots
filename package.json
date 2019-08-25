@@ -10,7 +10,7 @@
   "dependencies": {
     "@google-cloud/bigquery": "^4.1.8",
     "cheerio": "^1.0.0-rc.3",
-    "hots-replay": "^1.0.3",
+    "hots-replay": "^1.0.4",
     "jimp": "^0.6.4",
     "request": "^2.88.0"
   },

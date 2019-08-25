@@ -188,18 +188,27 @@ class HotsGameData extends HotsGameDataBase {
         });
         return accounts;
     }
-    getPlayers(accountId) {
+    getPlayers(accountId = null) {
         if (this.plugin.getConfigValue("game-storage-dir") === "") {
             return [];
         }
-        let players = [];
-        let files = fs.readdirSync(path.join(this.plugin.getConfigValue("game-storage-dir"), "Accounts", accountId));
-        files.forEach((file) => {
-            if (file.match(/^[0-9]+\-Hero\-[0-9]+\-[0-9]+$/)) {
-                players.push(file);
+        if (accountId !== null) {
+            let players = [];
+            let files = fs.readdirSync(path.join(this.plugin.getConfigValue("game-storage-dir"), "Accounts", accountId));
+            files.forEach((file) => {
+                if (file.match(/^[0-9]+\-Hero\-[0-9]+\-[0-9]+$/)) {
+                    players.push(file);
+                }
+            });
+            return players;
+        } else {
+            let players = [];
+            let accounts = this.getAccounts();
+            for (let i = 0; i < accounts.length; i++) {
+                players.push( ...this.getPlayers(accounts[i].id) );
             }
-        });
-        return players;
+            return players;
+        }
     }
     getFile() {
         return path.join(this.plugin.path, "data", "gameData.json");
@@ -209,6 +218,44 @@ class HotsGameData extends HotsGameDataBase {
     }
     getLatestSave() {
         return this.saves.latestSave;
+    }
+    getSelectedHero() {
+        let baseDir = this.plugin.getConfigValue("game-temp-dir");
+        if ((baseDir === "") || !fs.existsSync(baseDir)) {
+            return null;
+        }
+        let trackerFile = path.join(baseDir, "TempWriteReplayP1", "replay.tracker.events");
+        if (fs.existsSync(trackerFile)) {
+            let trackerBuffer = new HotsReplay.Buffer(fs.readFileSync(trackerFile));
+            let events = HotsReplay.Decoder.decode_event_stream(trackerBuffer, "tracker_eventid_typeid", "tracker_event_types", false);
+            let playerHandles = this.getPlayers();
+            let playerId = null;
+            for (let i = 0; i < events.length; i++) {
+                if (playerId === null) {
+                    if (events[i].m_eventName === "PlayerInit") {
+                        let playerHandle = HotsReplay.Decoder.getMapValue(events[i].m_stringData, 'ToonHandle');
+                        if (playerHandles.indexOf(playerHandle) !== -1) {
+                            playerId = HotsReplay.Decoder.getMapValue(events[i].m_intData, 'PlayerID');
+                        }
+                    }
+                } else {
+                    if (events[i].m_eventName === "PlayerSpawned") {
+                        let spawnPlayerId = HotsReplay.Decoder.getMapValue(events[i].m_intData, 'PlayerID');
+                        if (playerId == spawnPlayerId) {
+                            let spawnHero = HotsReplay.Decoder.getMapValue(events[i].m_stringData, 'Hero');
+                            let spawnHeroId = spawnHero.substr(4).toLowerCase();
+                            let spawnHeroName = this.getHeroName(spawnHeroId);
+                            if ((typeof spawnHeroName === "undefined") || (spawnHeroName === null)) {
+                                return spawnHeroId;
+                            } else {
+                                return spawnHeroName;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return null;
     }
     isGameActive() {
         let now = (new Date()).getTime();
@@ -537,8 +584,8 @@ class HotsGameData extends HotsGameDataBase {
         this.progressTaskNew();
         return new Promise((resolve, reject) => {
             // Do not update saves more often than every 10 seconds
-            let replayUpdateAge = ((new Date()).getTime() - this.saves.lastUpdate) / 1000;
-            if (replayUpdateAge < 10) {
+            let savesUpdateAge = ((new Date()).getTime() - this.saves.lastUpdate) / 1000;
+            if (savesUpdateAge < 10) {
                 resolve(true);
                 return;
             }
@@ -601,6 +648,7 @@ class HotsGameData extends HotsGameDataBase {
             });
         } catch (error) {
             // May happen when files or directories are deleted
+            console.error(error);
         }
         return maxMtime;
     }

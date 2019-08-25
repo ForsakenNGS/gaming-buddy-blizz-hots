@@ -170,6 +170,7 @@ class BlizzHotsBackend extends GamingBuddyPluginBackend {
         if (this.config.values['game-temp-dir'] == "") {
             this.config.values['game-temp-dir'] = HotsHelpers.detectGameTempDir();
             this.setConfigValues(this.config.values);
+            console.log(this.config.values['game-temp-dir']);
         }
         return this.gameData.updateSaves().then(() => {
             return this.gameData.updateReplays();
@@ -178,6 +179,9 @@ class BlizzHotsBackend extends GamingBuddyPluginBackend {
             let prevState = this.gameState;
             if (this.gameData.isGameActive()) {
                 this.gameState = gameStatePlaying;
+                if (this.playerCharacter === null) {
+                    this.playerCharacter = this.gameData.getSelectedHero();
+                }
                 return Promise.resolve(prevState);
             } else {
                 return this.draft.update().then((draftActive) => {
