@@ -59,7 +59,7 @@ class BlizzHotsBackend extends GamingBuddyPluginBackend {
             this.config.setSelectOptions("language", languageOptions);
             this.sendConfigToGui();
             this.sendMessage("gameData", this.gameData);
-            this.uploadReplays();
+            this.gameData.uploadReplays();
         });
         // Bind events
         this.bindEvents();
@@ -100,6 +100,10 @@ class BlizzHotsBackend extends GamingBuddyPluginBackend {
         // Player changed
         this.draft.on("player.update", (team, player) => {
             this.sendMessage("draft.player", player);
+        });
+        // Replay updated
+        this.gameData.on("replay.update", (replayIndex) => {
+            this.sendMessage("replay.update", replayIndex, this.gameData.replays.details[replayIndex]);
         });
     }
 

@@ -79,6 +79,11 @@ class BlizzHotsFrontend extends GamingBuddyPluginFrontend {
         this.talentProvider = parameters[0];
         jQuery(".hots-talent-helper").guiElement("render");
         break;
+      case "replay.update":
+        let replayIndex = parameters[0];
+        this.gameData.replays.details[replayIndex] = parameters[1];
+        jQuery(".hots-replay[data-index=\""+replayIndex+"\"]").guiElement("render");
+        break;
       case "gameData":
         this.gameData.loadFromJSON(parameters[0]);
         break;

@@ -493,7 +493,6 @@ class HotsGameData extends HotsGameDataBase {
         });
     }
     uploadReplays() {
-        this.plugin.debugStatus("Uploading replays ...");
         // Check upload state
         let uploadPromise = Promise.resolve(0);
         if (!this.plugin.getConfigValue("replays")) {
@@ -514,13 +513,16 @@ class HotsGameData extends HotsGameDataBase {
                     uploadPromise = uploadPromise.then((uploadCount) => {
                         uploadCount++;
                         return new Promise((resolve, reject) => {
+                            this.plugin.debugStatus("Uploading replay '"+path.basename(replayData.file)+"' via "+uploadProvider+"...");
                             HotsReplayUploaders[uploadProvider].upload(replayData.file).then((result) => {
                                 replayData.replayUploads[uploadProvider] = { result: result };
                                 this.emit("replay.update", i);
+                                this.save();
                                 resolve(uploadCount);
                             }).catch((error) => {
                                 replayData.replayUploads[uploadProvider] = { result: "error", error: error };
                                 this.emit("replay.update", i);
+                                this.save();
                                 resolve(uploadCount);
                             });
                         });

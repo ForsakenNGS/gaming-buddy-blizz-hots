@@ -62,6 +62,14 @@ class HotsGameDataBase extends EventEmitter {
                 this.replays = cacheData.replays;
                 this.playerPicks = cacheData.playerPicks;
                 this.playerBattleTags = cacheData.playerBattleTags;
+                // Reset failed / unfinished replay uploads
+                for (let i = 0; i < this.replays.details.length; i++) {
+                    for (let uploadProvider in this.replays.details[i].replayUploads) {
+                        if (this.replays.details[i].replayUploads[uploadProvider].result === "pending") {
+                            delete this.replays.details[i].replayUploads[uploadProvider];
+                        }
+                    }
+                }
             }
         } catch (e) {
             console.error("Failed to read gameData data!");
