@@ -181,6 +181,8 @@ class BlizzHotsBackend extends GamingBuddyPluginBackend {
                 this.gameState = gameStatePlaying;
                 if (this.playerCharacter === null) {
                     this.playerCharacter = this.gameData.getSelectedHero();
+                    this.getPageNav("talents").visible = true;
+                    this.talentProvider.update();
                 }
                 return Promise.resolve(prevState);
             } else {
