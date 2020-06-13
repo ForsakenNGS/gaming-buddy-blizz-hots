@@ -1,6 +1,6 @@
 {
   "name": "@forsaken87/gaming-buddy-blizz-hots",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "main": "main.js",
   "author": "Jens N",
   "license": "GPL-3.0",
@@ -15,6 +15,6 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
-    "@forsaken87/gaming-buddy-plugins": "^1.0.5"
+    "@forsaken87/gaming-buddy-plugins": "^1.0.6"
   }
 }

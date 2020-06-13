@@ -21,7 +21,7 @@ class HotsDraft extends EventEmitter {
     this.teams = null;
     this.teamActive = null;
     // Layouts
-    this.layoutDraft = this.plugin.loadLayoutFromXmlFile( path.resolve(plugin.getFilePath("layout", "draft.xml")) );
+    this.layoutDraft = this.plugin.loadLayoutFromXmlFile( path.resolve(plugin.getFilePath("layout", "draft.xml")) )[0];
     this.layoutBanCompare = this.layoutDraft.getById("draft.ban.compare.size").setScale(1, 1);
     // Ban images for comparing
     this.banImages = null;

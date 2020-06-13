@@ -88,8 +88,14 @@ class IcyVeinsProvider extends HotsTalentSuggestions {
             if (this.plugin.playerCharacter !== null) {
                 this.talents = this.getHeroByName(this.plugin.playerCharacter);
             }
-            if ((this.talents === null) || this.talents.hasOwnProperty("parsed")) {
-                // No hero selected or build already parsed
+            if (this.talents === null) {
+                // No or unknown hero selected
+                if (this.plugin.playerCharacter !== null) {
+                    console.log("No build guide for hero '"+this.plugin.playerCharacter+"' found on icyveins.");
+                }
+                resolve();
+            } else if (this.talents.hasOwnProperty("parsed")) {
+                // Build already parsed
                 resolve();
             } else {
                 console.log("Loading Icyveins build guide for '"+this.talents.id+"'...");
