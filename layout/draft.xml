@@ -49,8 +49,8 @@
     </layout>
 
     <!-- Boost icon -->
-    <color id="boost" r="100" g="200" b="200" toleranceLum="25" toleranceHue="20"></color>
-    <color id="boost" r="30" g="80" b="95" toleranceLum="25" toleranceHue="20"></color>
+    <color id="boost" r="30" g="200" b="200" toleranceLum="25" toleranceHue="20"></color>
+    <color id="boost" r="20" g="80" b="95" toleranceLum="25" toleranceHue="10"></color>
 
     <!-- Player picks -->
     <layout id="picks.blue" left="3/1920" top="52/1080" width="308/1920" height="898/1080">
