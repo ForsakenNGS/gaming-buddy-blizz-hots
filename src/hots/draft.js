@@ -397,8 +397,12 @@ class HotsDraft extends EventEmitter {
               playerPicks.push(
                 pickActive.apply(pickActive.cropParentImage(resultImage)).then((result) => {
                   this.plugin.debugLayoutsAdd(result);
-                  player.setName(result[0][0].extra.ocrResult.text.trim(), false);
-                  player.setImagePlayerName(result[0][1]);
+                  let playerName = result[0][0].extra.ocrResult.text.trim();
+                  if (playerName != "") {
+                    player.setName(playerName, false);
+                    player.setImagePlayerName(result[0][1]);
+                    this.plugin.gameData.updatePlayerRecentPicks(player);
+                  }
                   return Promise.resolve(result[0])
                 })
               );
@@ -406,10 +410,13 @@ class HotsDraft extends EventEmitter {
               let pickInactive = resultLayout.getById(resultLayout.id + ".inactive");
               playerPicks.push(
                 pickInactive.apply(pickInactive.cropParentImage(resultImage)).then((result) => {
+                  let playerName = result[0][0].extra.ocrResult.text.trim();
                   this.plugin.debugLayoutsAdd(result);
-                  player.setName(result[0][0].extra.ocrResult.text.trim(), true);
-                  player.setImagePlayerName(result[0][1]);
-                  this.plugin.gameData.updatePlayerRecentPicks(player);
+                  if (playerName != "") {
+                    player.setName(playerName, true);
+                    player.setImagePlayerName(result[0][1]);
+                    this.plugin.gameData.updatePlayerRecentPicks(player);
+                  }
                   return Promise.resolve(result[0])
                 })
               );
